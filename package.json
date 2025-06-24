@@ -38,6 +38,7 @@
     "eslint": "^9",
     "eslint-config-next": "15.3.3",
     "graphql": "^16.11.0",
+    "prettier": "^3.6.0",
     "tailwindcss": "^4",
     "tw-animate-css": "^1.3.3",
     "typescript": "^5.8.3",
