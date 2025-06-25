@@ -1,0 +1,8 @@
+# .vercelignore
+
+node_modules
+.env
+.env.local
+coverage
+src/gql/*
+
