@@ -1,3 +1,3 @@
-export function ProductDetail (){
+export default function ProductDetail (){
     return <></>
 }
