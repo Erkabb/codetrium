@@ -34,7 +34,10 @@ export default function RootLayout({
       <ApolloWrapper>
           <AuthProvider>
               <Header/>
-              {children}
+              <div className="min-h-svh">
+                  {children}
+              </div>
+
               <Footer/>
           </AuthProvider>
       </ApolloWrapper>

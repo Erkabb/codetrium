@@ -1,4 +1,5 @@
-import Image from "next/image";
+'use client';
+
 import {SearchIcon} from "lucide-react";
 import {
   Select,
@@ -7,16 +8,20 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select"
-import {Button} from "@/components/ui/button";
+import {useGetVideosQuery} from "@/gql/video/get-videos.generated";
+import Link from "next/link";
 
 export default function Home() {
+  const {data, loading} = useGetVideosQuery();
+  const videos = data?.getVideos;
+  console.log(videos);
   return (
-    <div className="min-h-screen font-sans">
+    <div className="font-sans">
       {/* Main Content */}
-      <main className="py-8 container mx-auto">
+      <main className="py-8 container mx-auto px-5">
 
         {/* Search, Filter, Sort */}
-        <div className="flex flex-col md:flex-row items-center gap-4 mb-8">
+        <div className="flex items-center gap-4 mb-8">
           <div className="relative flex-grow">
             <input
               type="text"
@@ -25,82 +30,44 @@ export default function Home() {
             />
             <SearchIcon className="size-5 absolute top-2 left-2 text-gray-500 "/>
           </div>
-          <Select>
-            <SelectTrigger className="w-[180px] h-10 ">
-              <SelectValue placeholder="Шүүх" />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="flutter">Flutter</SelectItem>
-              <SelectItem value="az">A-Z</SelectItem>
-              <SelectItem value="za">Z-A</SelectItem>
-            </SelectContent>
-          </Select>
-
+          <div className="hidden lg:block">
+            <Select>
+              <SelectTrigger className="w-[180px] h-10 ">
+                <SelectValue placeholder="Шүүх" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="flutter">Flutter</SelectItem>
+                <SelectItem value="az">A-Z</SelectItem>
+                <SelectItem value="za">Z-A</SelectItem>
+              </SelectContent>
+            </Select>
+          </div>
         </div>
 
-        {/* Categories */}
-        <div className="flex gap-2 mb-8">
-          <Button className="border border-indigo-600 bg-white text-indigo-600 px-4 py-2 rounded-lg">Web Development</Button>
-          <Button className="border border-indigo-600 bg-white text-indigo-600 px-4 py-2 rounded-lg">Flutter</Button>
-        </div>
-
-        {/* Product Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {/* Product Card 1 */}
-          <div className="border rounded-lg p-4 shadow-md">
-            <Image src="/app-design-course.png" alt="App Design Course" width={300} height={200} className="rounded-md mb-4" />
-            <h2 className="font-bold text-lg mb-2">Learn App Design</h2>
-            <p className="text-sm text-gray-600 mb-2">Understand Digital Design Fundamentals to Make Beautiful Apps</p>
-            <p className="text-xs text-gray-500 mb-4">Course • By Angela Yu</p>
-            <div className="text-right font-bold text-lg">$10</div>
-          </div>
-
-          {/* Product Card 2 */}
-          <div className="border rounded-lg p-4 shadow-md">
-            <Image src="/app-marketing-course.png" alt="App Marketing Course" width={300} height={200} className="rounded-md mb-4" />
-            <h2 className="font-bold text-lg mb-2">Learn App Marketing</h2>
-            <p className="text-sm text-gray-600 mb-2">Growth Hack Your Way to More Downloads on the App Stores.</p>
-            <p className="text-xs text-gray-500 mb-4">Course • By Angela Yu</p>
-            <div className="text-right font-bold text-lg">$10</div>
-          </div>
-
-          {/* Product Card 3 */}
-          <div className="border rounded-lg p-4 shadow-md">
-            <Image src="/12-rules-ebook.png" alt="12 Rules to Learn Code Ebook" width={300} height={200} className="rounded-md mb-4" />
-            <h2 className="font-bold text-lg mb-2">12 Rules to Learn To Code eBook</h2>
-            <p className="text-sm text-gray-600 mb-2">Top Tips and Tricks for Levelling Up as a Developer</p>
-            <p className="text-xs text-gray-500 mb-4">eBook • By Angela Yu</p>
-            <div className="text-right font-bold text-lg">$5</div>
-          </div>
-
-          {/* Product Card 4 */}
-          <div className="border rounded-lg p-4 shadow-md">
-            <Image src="/web-dev-bootcamp.png" alt="Web Development Bootcamp" width={300} height={200} className="rounded-md mb-4" />
-            <h2 className="font-bold text-lg mb-2">The Complete Web Development Bootcamp</h2>
-            <p className="text-sm text-gray-600 mb-2">Master front-end and back-end web development.</p>
-            <p className="text-xs text-gray-500 mb-4">Bootcamp • By Angela Yu</p>
-            <div className="text-right font-bold text-lg">$10</div>
-          </div>
-
-          {/* Product Card 5 */}
-          <div className="border rounded-lg p-4 shadow-md">
-            <Image src="/flutter-dev-bootcamp.png" alt="Flutter Development Bootcamp" width={300} height={200} className="rounded-md mb-4" />
-            <h2 className="font-bold text-lg mb-2">The Complete Flutter Development Bootcamp</h2>
-            <p className="text-sm text-gray-600 mb-2">Build beautiful, natively compiled applications for mobile, web, and desktop from a single codebase.</p>
-            <p className="text-xs text-gray-500 mb-4">Bootcamp • By Angela Yu</p>
-            <div className="text-right font-bold text-lg">$10</div>
-          </div>
-
-          {/* Product Card 6 */}
-          <div className="border rounded-lg p-4 shadow-md">
-            <Image src="/ml-ds-bootcamp.png" alt="Machine Learning & Data Science Bootcamp" width={300} height={200} className="rounded-md mb-4" />
-            <h2 className="font-bold text-lg mb-2">The Complete Machine Learning & Data Science Bootcamp</h2>
-            <p className="text-sm text-gray-600 mb-2">Learn to build intelligent systems and analyze data.</p>
-            <p className="text-xs text-gray-500 mb-4">Bootcamp • By Angela Yu</p>
-            <div className="text-right font-bold text-lg">$10</div>
-          </div>
+        <div className="flex gap-6 p-5 overflow-x-auto shrink-0">
+          {videos?.map((v)=> {
+            const videoId = getYoutubeId(v.youtubeUrl);
+            if(!videoId) return null;
+            return(
+                <Link href={`/course/${v._id}`} key={v._id} className="border rounded-md p-5 shadow-sm shadow-gray/50">
+                  {loading && (<div className="skeleton w-72 h-10"/>)}
+                  <iframe
+                      src={`https://www.youtube.com/embed/${videoId}`}
+                      key={v._id}
+                      width="460"
+                      height="400"
+                      allowFullScreen
+                      frameBorder="0"/>
+                  <h5 className="text-lg font-semibold">{v.title}</h5>
+                </Link>
+            )})}
         </div>
       </main>
     </div>
   );
+}
+
+function getYoutubeId(url: string): string | null {
+  const match = url.match(/[?&]v=([a-zA-Z0-9_-]+)/);
+  return match ? match[1] : null;
 }
