@@ -1,3 +1,6 @@
-export default function ProductDetail (){
-    return <></>
+import ProductDetail from "../course-detail";
+
+
+export default function CourseDetailPage() {
+  return <ProductDetail />;
 }

@@ -43,8 +43,9 @@ export default function Home() {
             </Select>
           </div>
         </div>
-
-        <div className="flex gap-6 p-5 overflow-x-auto shrink-0">
+    <h3 className="pt-4 text-xl text-bold"> Хичээлүүд</h3>
+        <div className="flex gap-6 my-4 overflow-x-auto shrink-0">
+      
           {videos?.map((v)=> {
             const videoId = getYoutubeId(v.youtubeUrl);
             if(!videoId) return null;
@@ -58,7 +59,9 @@ export default function Home() {
                       height="400"
                       allowFullScreen
                       frameBorder="0"/>
-                  <h5 className="text-lg font-semibold">{v.title}</h5>
+                  <h5 className="text-lg font-semibold mt-2 text-uppercase">{v.title}</h5>
+                   <p className="text-md font-normal">{v.title}</p>
+                    <p className="text-md font-semibold">50.000</p>
                 </Link>
             )})}
         </div>
