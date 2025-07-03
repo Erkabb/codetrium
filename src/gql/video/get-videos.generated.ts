@@ -8,7 +8,7 @@ export type GetVideosQueryVariables = Types.Exact<{ [key: string]: never }>;
 export type GetVideosQuery = {
   __typename?: "Query";
   getVideos: Array<{
-    __typename?: "VideoUpload";
+    __typename?: "Page";
     _id: string;
     title: string;
     description?: string | null;
