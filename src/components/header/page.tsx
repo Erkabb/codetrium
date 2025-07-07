@@ -32,7 +32,7 @@ export function Header() {
         {/* Navigation */}
         <div className="flex lg:gap-4 gap-2 items-center">
           <Link
-            href="/"
+            href="/course"
             className="font-semibold text-sm uppercase hidden lg:block"
           >
             Хичээлүүд

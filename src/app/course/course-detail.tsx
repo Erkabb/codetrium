@@ -2,6 +2,7 @@
 
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import CourseCurriculum from "./course-content";
+import {useGetVideosQuery} from "@/gql/video/get-videos.generated";
 
 type CourseLesson = {
   title: string;
@@ -74,6 +75,9 @@ const dummyCourse: Course = {
 
 export default function ProductDetail() {
   const course = dummyCourse;
+
+  const {data, loading} = useGetVideosQuery();
+  console.log(data);
 
   return (
     <div className="container mx-auto p-6">
