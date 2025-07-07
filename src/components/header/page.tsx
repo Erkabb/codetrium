@@ -1,13 +1,19 @@
+'use client';
+
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
-import { AlignJustify, CircleUser } from "lucide-react";
+import { AlignJustify } from "lucide-react";
 import Image from "next/image";
+import {useState} from "react";
+import {SidebarComponent} from "@/components/sidebar/page";
 
 export function Header() {
+  const [ isOpen, setIsOpen ]=useState(false);
+
   return (
     <div className="bg-blue-900 text-white py-3">
       <div className="container flex justify-between items-center mx-auto px-5">
-        
+
         {/* Logo + Brand */}
         <div className="flex items-center gap-2">
           {/* Лого зураг — та өөрийн path руу солих хэрэгтэй */}
@@ -32,16 +38,15 @@ export function Header() {
             Хичээлүүд
           </Link>
 
-          <Link href="/" className="font-semibold text-sm uppercase lg:hidden">
-            <AlignJustify className="size-5" />
-          </Link>
-
-          <Link href="/login">
-            <Button className="lg:border-white lg:border rounded p-2 flex gap-2 bg-transparent">
-              <CircleUser className="size-6" />
-              <span className="hidden lg:block">Нэвтрэх</span>
-            </Button>
-          </Link>
+          <Button className="btn-sm bg-transparent" onClick={() => {
+            setIsOpen(true)
+            if(isOpen){
+              setIsOpen(false);
+            }
+          }}>
+            <AlignJustify className="size-6" />
+            {isOpen && <SidebarComponent isOpen={isOpen}/>}
+          </Button>
         </div>
       </div>
     </div>

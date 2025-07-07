@@ -8,8 +8,6 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select"
-import {useGetVideosQuery} from "@/gql/video/get-videos.generated";
-import Link from "next/link";
 
 export default function Home() {
 
@@ -41,7 +39,9 @@ export default function Home() {
             </Select>
           </div>
         </div>
+  <div>
 
+  </div>
       </main>
     </div>
   );
