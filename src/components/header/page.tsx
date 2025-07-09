@@ -38,7 +38,7 @@ export function Header() {
             Хичээлүүд
           </Link>
 
-          <Button className="btn-sm bg-transparent" onClick={() => {
+          <Button className="btn-sm bg-transparent hover:bg-white hover:text-indigo-600" onClick={() => {
             setIsOpen(true)
             if(isOpen){
               setIsOpen(false);

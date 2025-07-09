@@ -1,12 +1,11 @@
 'use client';
 
 import { usePathname } from "next/navigation";
-import { 
-    BookOpen, 
-    Settings, 
-    Home, 
-    Video, 
-    Users
+import {
+    BookOpen,
+    Settings,
+    Home,
+    Users, OutdentIcon
 } from "lucide-react";
 import {
     Sidebar,
@@ -41,9 +40,9 @@ export function SidebarComponent({ isOpen }: {isOpen: boolean}) {
             icon: BookOpen,
         },
         {
-            title: "YouTube Upload",
-            href: "/youtube-upload",
-            icon: Video,
+            title: "Login",
+            href: "/login",
+            icon: OutdentIcon,
         },
     ];
 
@@ -58,11 +57,6 @@ export function SidebarComponent({ isOpen }: {isOpen: boolean}) {
             href: "/settings",
             icon: Settings,
         },
-        {
-            title: "Add User",
-            href: '/add-user',
-            icon: Users,
-        }
     ];
 
     return (
@@ -82,10 +76,10 @@ export function SidebarComponent({ isOpen }: {isOpen: boolean}) {
                                 {navigationItems.map((item) => (
                                     <SidebarMenuItem key={item.href}>
                                         <SidebarMenuButton asChild isActive={pathname === item.href}>
-                                            <Link href='/'>
+                                            <a href={item.href}>
                                                 <item.icon className="size-4" />
                                                 <span>{item.title}</span>
-                                            </Link>
+                                            </a>
                                         </SidebarMenuButton>
                                     </SidebarMenuItem>
                                 ))}
@@ -95,16 +89,16 @@ export function SidebarComponent({ isOpen }: {isOpen: boolean}) {
 
                     {isAuth && (
                         <SidebarGroup>
-                            <SidebarGroupLabel>Administration</SidebarGroupLabel>
+                            <SidebarGroupLabel>About you</SidebarGroupLabel>
                             <SidebarGroupContent>
                                 <SidebarMenu>
                                     {adminItems.map((item) => (
                                         <SidebarMenuItem key={item.href}>
                                             <SidebarMenuButton asChild isActive={pathname === item.href}>
-                                                <Link href='/'>
+                                                <a href={item.href}>
                                                     <item.icon className="size-4" />
                                                     <span>{item.title}</span>
-                                                </Link>
+                                                </a>
                                             </SidebarMenuButton>
                                         </SidebarMenuItem>
                                     ))}

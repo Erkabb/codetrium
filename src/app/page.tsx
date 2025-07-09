@@ -8,6 +8,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select"
+import Content from "@/app/course/page";
 
 export default function Home() {
 
@@ -40,7 +41,7 @@ export default function Home() {
           </div>
         </div>
   <div>
-
+  <Content/>
   </div>
       </main>
     </div>
